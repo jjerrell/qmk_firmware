@@ -30,35 +30,35 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         __________________WORKMN_L1__________________, __________________WORKMN_R1__________________,
         __________________WORKMN_L2__________________, __________________WORKMN_R2__________________,
         __________________WORKMN_L3__________________, __________________WORKMN_R3__________________,
-        XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT,                       KC_RSFT, XXXXXXX, XXXXXXX, XXXXXXX
+        XXXXXXX, XXXXXXX, KC_UP, KC_LEFT,                        KC_RIGHT, KC_DOWN, XXXXXXX, XXXXXXX
     ),
 
     [_LOWER] = LAYOUT_moonlander_mods(
         __________________LOWER_L1___________________, __________________LOWER_R1___________________,
         __________________LOWER_L2___________________, __________________LOWER_R2___________________,
         __________________LOWER_L3___________________, __________________LOWER_R3___________________,
-          XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT,                         KC_0, KC_DOT, KC_COMM, KC_PLUS
+          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         KC_0, KC_DOT, KC_COMM, KC_PLUS
     ),
 
     [_RAISE] = LAYOUT_moonlander_common(
         __________________RAISE_L1___________________, __________________RAISE_R1___________________,
         __________________RAISE_L2___________________, __________________RAISE_R2___________________,
         __________________RAISE_L3___________________, __________________RAISE_R3___________________,
-        XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT,                       KC_RSFT, XXXXXXX, XXXXXXX, XXXXXXX
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
     [_ADJUST] = LAYOUT_moonlander_common(
         __________________ADJUST_L1__________________, __________________ADJUST_R1__________________,
         __________________ADJUST_L2__________________, __________________ADJUST_R2__________________,
         __________________ADJUST_L3__________________, __________________ADJUST_R3__________________,
-        XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT,                       KC_RSFT, XXXXXXX, XXXXXXX, XXXXXXX
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
     [_SPECIAL] = LAYOUT_moonlander_common(
-        XXXXXXX, XXXXXXX, KC_WH_D, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, KC_WH_L, KC_WH_U, KC_WH_R, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, KC_LALT,                       KC_RALT, XXXXXXX, XXXXXXX, XXXXXXX
+        XXXXXXX, XXXXXXX, KC_WH_D, XXXXXXX, XXXXXXX,     XXXXXXX, MACRO_7, MACRO_8, MACRO_9, XXXXXXX,
+        XXXXXXX, KC_WH_L, KC_WH_U, KC_WH_R, XXXXXXX,     XXXXXXX, MACRO_4, MACRO_5, MACRO_6, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, MACRO_1, MACRO_2, MACRO_3, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                       MACRO_0, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
     [_GAME] = LAYOUT_moonlander_gamepad(

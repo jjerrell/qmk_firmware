@@ -37,25 +37,26 @@ __attribute__((weak)) void leader_scan_secrets(void) {}
                 SEND_STRING(SS_LGUI("r"));
             }
 
+            SEQ_ONE_KEY(KC_B) {
+                SEND_STRING(SS_LGUI("b"));
+            }
+
+            SEQ_TWO_KEYS(KC_B, KC_R) {
+                SEND_STRING(SS_LSFT(SS_LGUI("r")));
+            }
+
+            SEQ_ONE_KEY(KC_T) {
+                SEND_STRING(SS_LGUI("u"));
+            }
+
             SEQ_TWO_KEYS(KC_B, KC_D) {
                 send_string_with_delay_P(PSTR(QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION " Built at: " QMK_BUILDDATE), TAP_CODE_DELAY);
             }
 
-            SEQ_TWO_KEYS(KC_L, KC_C) {
-                send_string_with_delay("/**  */", TAP_CODE_DELAY);
-                wait_ms(TAPPING_TERM);
-                tap_code(KC_LEFT);
-                tap_code(KC_LEFT);
-                tap_code(KC_LEFT);
-                if (!(mods & MOD_MASK_SHIFT)) {
-                    tap_code(KC_ENT);
-                }
-            }
-
-            set_mods(mods);
             #ifndef NO_SECRETS
             leader_scan_secrets();
             #endif // !NO_SECRETS
+            set_mods(mods);
         }
     }
 #endif

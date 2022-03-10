@@ -17,20 +17,17 @@
 
 #include "jjerrell.h"
 
-enum planck_layers {
-    _GAME_LOWER = LAYER_SAFE_RANGE,
-    // _GAME_RAISE,
-};
-
 #define LAYOUT_planck_plain(...)     WRAPPER_ortho_4x12(__VA_ARGS__)
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_WORKMAN] = LAYOUT_planck_base(
+    [_WORKMAN] = LAYOUT_planck_mods(
         __________________WORKMN_L1__________________, __________________WORKMN_R1__________________,
         __________________WORKMN_L2__________________, __________________WORKMN_R2__________________,
-        __________________WORKMN_L3__________________, __________________WORKMN_R3__________________
+        __________________WORKMN_L3__________________, __________________WORKMN_R3__________________,
+        KC_LEAD, OSL(_SPECIAL), KC_CCCV, KC_HYPR,                KC_MEH, RGB_TOG, RGB_IDL, LED_LEVEL
     ),
+
     /* Lower - Nav/Select/Nums
     * ,-----------------------------------------------------------------------------------.
     * | PGUP | BSPC |  UP  | DEL  | PGDN |      |      |      |   7  |   8  |   9  |  *   |
@@ -43,10 +40,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     * `-----------------------------------------------------------------------------------'
     */
     [_LOWER] = LAYOUT_planck_mods(
-        __________________LOWER_L1___________________, XXXXXXX, XXXXXXX, __________________LOWER_R1___________________,
-        __________________LOWER_L2___________________, XXXXXXX, XXXXXXX, __________________LOWER_R2___________________,
-        __________________LOWER_L3___________________, XXXXXXX, XXXXXXX, __________________LOWER_R3___________________,
-          _________________________________________PLANCK_LOWER_BOTTOM_ROW_________________________________________
+        __________________LOWER_L1___________________, __________________LOWER_R1___________________,
+        __________________LOWER_L2___________________, __________________LOWER_R2___________________,
+        __________________LOWER_L3___________________, __________________LOWER_R3___________________,
+        KC_LEAD, KC_LSFT, KC_CCCV, KC_HYPR,                           KC_0, KC_DOT, KC_COMM, XXXXXXX
     ),
     /* Raise - Symbols
     * ,-----------------------------------------------------------------------------------.
@@ -62,7 +59,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_RAISE] = LAYOUT_planck_common(
         __________________RAISE_L1___________________, __________________RAISE_R1___________________,
         __________________RAISE_L2___________________, __________________RAISE_R2___________________,
-        __________________RAISE_L3___________________, __________________RAISE_R3___________________
+        __________________RAISE_L3___________________, __________________RAISE_R3___________________,
+        KC_LEAD, KC_LSFT, KC_CCCV, KC_HYPR,                      KC_MEH, RGB_TOG, RGB_IDL, LED_LEVEL
     ),
     /* Adjust (Lower + Raise)
     * ,-----------------------------------------------------------------------------------.
@@ -78,21 +76,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ADJUST] = LAYOUT_planck_common(
          __________________ADJUST_L1__________________, __________________ADJUST_R1__________________,
          __________________ADJUST_L2__________________, __________________ADJUST_R2__________________,
-         __________________ADJUST_L3__________________, __________________ADJUST_R3__________________
+         __________________ADJUST_L3__________________, __________________ADJUST_R3__________________,
+        KC_LEAD, KC_LSFT, KC_CCCV, KC_HYPR,                      KC_MEH, RGB_TOG, RGB_IDL, LED_LEVEL
     ),
-    [_GAME] = LAYOUT_planck_plain(
-           __________________QWERTY_L1__________________,        _______, _______,              XXXXXXX,  KC_9,    KC_0,    KC_MINS,  KC_EQL,
-           __________________QWERTY_L2__________________,        XXXXXXX, XXXXXXX,              XXXXXXX,  KC_5,    KC_6,    KC_7,     KC_8,
-           __________________QWERTY_L3__________________,        XXXXXXX, XXXXXXX,              XXXXXXX,  KC_1,    KC_2,    KC_3,     KC_4,
-     KC_LSFT,  KC_LGUI, KC_LALT,  KC_LCTL, LT(_LOWER, KC_BSPC),  KC_SPC,  XXXXXXX, LT(_WORKMAN, KC_ENT),  MACRO_1, MACRO_2, MACRO_3,  MACRO_4
-    ),
-    [_GAME_LOWER] = LAYOUT_planck_plain(
-        _______, _______, _______, _______, _______, _______, _______, _______, C(_______), C(_______), C(_______), C(_______),
-        _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, C(_______), C(_______), C(_______), C(_______),
-        _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, C(_______), C(_______), C(_______), C(_______),
-        MACRO_1, MACRO_2, MACRO_3, MACRO_4, _______, _______, XXXXXXX, _______, MACRO_5,    MACRO_6,    MACRO_7,    MACRO_8
+    [_SPECIAL] = LAYOUT_planck_common(
+         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, MACRO_7, MACRO_8, MACRO_9, XXXXXXX,
+         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, MACRO_4, MACRO_5, MACRO_6, XXXXXXX,
+         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, MACRO_1, MACRO_2, MACRO_3, XXXXXXX,
+         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                     MACRO_0, XXXXXXX, XXXXXXX, XXXXXXX
     )
-
 };
 // clang-format on
 
@@ -115,18 +107,6 @@ void planck_ez_teeth_set(layer_state_t state) {
             planck_ez_left_led_level(40);
             planck_ez_right_led_level(40);
             break;
-        case _GAME_LOWER:
-            planck_ez_left_led_level(20);
-            break;
-// todo case _GAME_RAISE:
-        //     planck_ez_right_led_level(20);
-        //     break;
-        case _WORKMAN:
-            if (IS_LAYER_ON(_GAME)) {
-                planck_ez_left_led_level(60);
-                planck_ez_right_led_level(60);
-                break;
-            }
         default:
             planck_ez_left_led_off();
             planck_ez_right_led_off();
@@ -137,7 +117,6 @@ void planck_ez_teeth_set(layer_state_t state) {
 layer_state_t layer_state_set_keymap(layer_state_t state) {
     planck_ez_left_led_off();
     planck_ez_right_led_off();
-    state = update_tri_layer_state(state, _GAME, _LOWER, _GAME_LOWER);
     planck_ez_teeth_set(state);
     return state;
 }

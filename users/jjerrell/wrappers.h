@@ -21,18 +21,18 @@
 #define QWERTY  KC_QWERTY
 #define WORKMN  KC_WORKMAN
 
-#define KC_CUT  LGUI(KC_X) 
-
 // Non-sane shortcuts for software macros or keybindings
-#define MACRO_1 ALL_T(KC_F12)
-#define MACRO_2 ALL_T(KC_F13)
-#define MACRO_3 ALL_T(KC_F14)
-#define MACRO_4 ALL_T(KC_F15)
+#define MACRO_0 HYPR(KC_F13)
+#define MACRO_1 HYPR(KC_F14)
+#define MACRO_2 HYPR(KC_F15)
+#define MACRO_3 HYPR(KC_F16)
+#define MACRO_4 HYPR(KC_F17)
+#define MACRO_5 HYPR(KC_F18)
+#define MACRO_6 HYPR(KC_F19)
+#define MACRO_7 MEH(KC_F13)
+#define MACRO_8 MEH(KC_F14)
+#define MACRO_9 MEH(KC_F15)
 
-#define MACRO_5 ALL_T(KC_F16)
-#define MACRO_6 ALL_T(KC_F17)
-#define MACRO_7 ALL_T(KC_F18)
-#define MACRO_8 ALL_T(KC_F19)
 
 // clang-format off
 #if (!defined(LAYOUT) && defined(KEYMAP))
@@ -41,7 +41,7 @@
 
 #if (defined(KEYBOARD_planck_ez))
 /** Planck EZ Empty
- * ,-----------------------------------------------------------------------------------.
+  *,-----------------------------------------------------------------------------------.
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |      |      |
@@ -52,14 +52,6 @@
  * `-----------------------------------------------------------------------------------'
  */
 
-#   define ____________________________________________________________PLANCK_VERBOSE_BOTTOM_ROW_____________________________________________________________ \
-           QK_LEAD, KC_LSFT, KC_CCCV, KC_HYPR, LT(_LOWER, KC_BSPC), SFT_T(KC_SPC), XXXXXXX, LT(_RAISE, KC_ENT),  KC_MEH,    RGB_TOG,    RGB_IDL,    LED_LEVEL
-
-#   define _________________________________________PLANCK_LOWER_BOTTOM_ROW_________________________________________ \
-           QK_LEAD, KC_LSFT, KC_CCCV, KC_HYPR,  KC_BSPC,  KC_SPC, XXXXXXX,   KC_ENT, KC_0, KC_DOT, KC_COMM, LED_LEVEL
-// TODO: It would be nice to find a way to apply the bottom row with optional left/right varargs. 
-//       I'm completely unsure if this language can support something like that though.
-
 /**
  * Basic Planck EZ Wrapper to expand "block" defines before sending 
  * to LAYOUT_ortho_4x12
@@ -69,42 +61,26 @@
 #   define WRAPPER_planck_common( \
         K01, K02, K03, K04, K05,     K08, K09, K0A, K0B, K0C, \
         K11, K12, K13, K14, K15,     K18, K19, K1A, K1B, K1C, \
-        K21, K22, K23, K24, K25,     K28, K29, K2A, K2B, K2C  \
+        K21, K22, K23, K24, K25,     K28, K29, K2A, K2B, K2C, \
+        K31, K32, K33, K34,               K39, K3A, K3B, K3C  \
     ) WRAPPER_ortho_4x12( \
-        K01,     K02,     K03,     K04,                K05 ,       XXXXXXX ,  XXXXXXX, K08,                 K09,     K0A,     K0B,     K0C,      \
-        K11,     K12,     K13,     K14,                K15 ,       XXXXXXX ,  XXXXXXX, K18,                 K19,     K1A,     K1B,     K1C,      \
-        K21,     K22,     K23,     K24,                K25 ,       XXXXXXX ,  XXXXXXX, K28,                 K29,     K2A,     K2B,     K2C,      \
-    ____________________________________________________________PLANCK_VERBOSE_BOTTOM_ROW_____________________________________________________________ )
-
-/**
- * Shifted Key conflicts:
- * K12, K13, K14, K19, K1A, K1B, K21, K2C
- */
-#   define WRAPPER_planck_base( \
-        K01, K02, K03, K04, K05,     K08, K09, K0A, K0B, K0C, \
-        K11, K12, K13, K14, K15,     K18, K19, K1A, K1B, K1C, \
-        K21, K22, K23, K24, K25,     K28, K29, K2A, K2B, K2C  \
-    ) WRAPPER_ortho_4x12( \
-                K01 ,       K02 ,       K03 ,       K04 ,                K05 ,      KC_GAME , KC_GAME, K08,                 K09 ,       K0A ,       K0B ,       K0C,        \
-                K11 , SFT_T(K12), GUI_T(K13), ALT_T(K14),                K15 ,      XXXXXXX , XXXXXXX, K18,                 ALT_T(K19), GUI_T(K1A), SFT_T(K1B), K1C,        \
-          CTL_T(K21),       K22 ,       K23 ,       K24 ,                K25 ,      XXXXXXX , XXXXXXX, K28,                 K29 ,       K2A ,       K2B ,       CTL_T(K2C), \
-                ____________________________________________________________PLANCK_VERBOSE_BOTTOM_ROW_____________________________________________________________   )
+        K01,  K02,  K03,  K04,                  K05,         KC_LPRN,        KC_RPRN,                 K08,  K09,  K0A,  K0B,  K0C, \
+        K11,  K12,  K13,  K14,                  K15,         KC_LBRC,        KC_RBRC,                 K18,  K19,  K1A,  K1B,  K1C, \
+        K21,  K22,  K23,  K24,                  K25,         MACRO_1,        MACRO_2,                 K28,  K29,  K2A,  K2B,  K2C, \
+        K31,  K32,  K33,  K34,  LT(_LOWER, KC_BSPC),   SFT_T(KC_SPC),        XXXXXXX,  LT(_RAISE, KC_ENT),  K39,  K3A,  K3B,  K3C)
 
 #   define WRAPPER_planck_mods( \
-        K01, K02, K03, K04, K05, K06, K07, K08, K09, K0A, K0B, K0C, \
-        K11, K12, K13, K14, K15, K16, K17, K18, K19, K1A, K1B, K1C, \
-        K21, K22, K23, K24, K25, K26, K27, K28, K29, K2A, K2B, K2C, \
-        K31, K32, K33, K34, K35, K36, K37, K38, K39, K3A, K3B, K3C  \
-    ) WRAPPER_ortho_4x12( \
-                K01 ,       K02 ,       K03 ,       K04 ,            K05 ,         K06 ,     K07, K08,             K09 ,       K0A ,       K0B ,       K0C,        \
-                K11 , SFT_T(K12), GUI_T(K13), ALT_T(K14),            K15 ,         K16 ,     K17, K18,             ALT_T(K19), GUI_T(K1A), SFT_T(K1B), K1C,        \
-          CTL_T(K21),       K22 ,       K23 ,       K24 ,            K25 ,         K26 ,     K27, K28,             K29 ,       K2A ,       K2B ,       CTL_T(K2C), \
-                K31,        K32 ,       K33 ,       K34 , LT(_LOWER, K35),   SFT_T(K36), XXXXXXX, LT(_RAISE, K38), K39 ,       K3A ,       K3B,        K3C         )
-
-
+        K01, K02, K03, K04, K05,     K08, K09, K0A, K0B, K0C, \
+        K11, K12, K13, K14, K15,     K18, K19, K1A, K1B, K1C, \
+        K21, K22, K23, K24, K25,     K28, K29, K2A, K2B, K2C, \
+        K31, K32, K33, K34,               K39, K3A, K3B, K3C  \
+    ) WRAPPER_planck_common( \
+                 K01,        K02,        K03,        K04,  K05,       K08,  K09,        K0A,        K0B,       K0C,        \
+                 K11, SFT_T(K12), GUI_T(K13), ALT_T(K14),  K15,       K18, ALT_T(K19), GUI_T(K1A), SFT_T(K1B), K1C,        \
+          CTL_T(K21),        K22,        K23,        K24,  K25,       K28,  K29,        K2A,        K2B,       CTL_T(K2C), \
+                 K31,        K32,        K33,        K34,                   K39,        K3A,        K3B,       K3C         )
 
 // These macros are used when defining layouts in keymap.c
-#   define LAYOUT_planck_base(...)    WRAPPER_planck_base(__VA_ARGS__)
 #   define LAYOUT_planck_common(...)  WRAPPER_planck_common(__VA_ARGS__)
 #   define LAYOUT_planck_mods(...)    WRAPPER_planck_mods(__VA_ARGS__)
 
@@ -126,24 +102,26 @@
              k31, k32, k33, k34, k35,             k91, k92, k93, k94, k95, \
              k41, k42, k43, k44,                       ka2, ka3, ka4, ka5  \
     ) WRAPPER_moonlander( \
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      \
-        XXXXXXX,     k11,     k12,     k13,     k14,     k15, XXXXXXX,   XXXXXXX, k71,     k72,     k73,     k74,     k75,     XXXXXXX,      \
-        XXXXXXX,     k21,     k22,     k23,     k24,     k25, XXXXXXX,   XXXXXXX, k81,     k82,     k83,     k84,     k85,     XXXXXXX,      \
-        KC_LSFT,     k31,     k32,     k33,     k34,     k35,                     k91,     k92,     k93,     k94,     k95,     KC_RSFT,      \
-   MO(_SPECIAL),     k41,     k42,     k43,     k44,        TO(_GAME),   XXXXXXX,          ka2,     ka3,     ka4,     ka5,     MO(_SPECIAL), \
-                           LT(_LOWER, KC_SPC),HYPR_T(KC_BSPC),QK_LEAD,   KC_CCCV,SFT_T(KC_TAB),LT(_RAISE, KC_ENT)                            )
+         KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5, KC_ARROW,   KC_MINS,  KC_6,   KC_7,   KC_8,    KC_9,    KC_0,     KC_EQL,      \
+        XXXXXXX,     k11,     k12,     k13,     k14,     k15,  KC_LPRN,   KC_RPRN,  k71,    k72,    k73,     k74,     k75,     KC_BSLS,      \
+        XXXXXXX,     k21,     k22,     k23,     k24,     k25,  KC_LBRC,   KC_RBRC,  k81,    k82,    k83,     k84,     k85,     KC_QUOT,      \
+        KC_LSFT,     k31,     k32,     k33,     k34,     k35,                       k91,    k92,    k93,     k94,     k95,     KC_RSFT,      \
+   MO(_SPECIAL),     k41,     k42,     k43,     k44,           MACRO_1,   MACRO_2,          ka2,    ka3,     ka4,     ka5,     MO(_SPECIAL), \
+                           LT(_LOWER, KC_SPC),HYPR_T(KC_BSPC), KC_LEAD,   KC_CCCV,MEH_T(KC_TAB),LT(_RAISE, KC_ENT)                            )
 
+// Wraps modifiers on top of regular keys for convenient tap/hold composition
 #   define WRAPPER_moonlander_mods( \
         k11, k12, k13, k14, k15,             k71, k72, k73, k74, k75, \
         k21, k22, k23, k24, k25,             k81, k82, k83, k84, k85, \
         k31, k32, k33, k34, k35,             k91, k92, k93, k94, k95, \
         k41, k42, k43, k44,                       ka2, ka3, ka4, ka5  \
     ) WRAPPER_moonlander_common( \
-              k11 ,       k12 ,       k13 ,       k14 , k15,             k71, k72,        k73,        k74,        k75, \
-              k21 , SFT_T(k22), GUI_T(k23), ALT_T(k24), k25,             k81, ALT_T(k82), GUI_T(k83), SFT_T(k84), k85, \
-        CTL_T(k31),       k32 ,       k33 ,       k34 , k35,             k91, k92,        k93,        k94,        CTL_T(k95), \
-              k41 ,       k42 ,       k43 ,       k44 ,                       ka2,        ka3,        ka4,        ka5  \
+               k11,        k12,        k13,        k14, k15,             k71, k72,        k73,        k74,        k75, \
+               k21, SFT_T(k22), GUI_T(k23), ALT_T(k24), k25,             k81, ALT_T(k82), GUI_T(k83), SFT_T(k84), k85, \
+        CTL_T(k31),        k32,        k33,        k34, k35,             k91, k92,        k93,        k94,        CTL_T(k95), \
+               k41,        k42,        k43,        k44,                       ka2,        ka3,        ka4,        ka5  \
     )
+
 #   define WRAPPER_moonlander_gamepad( \
         k00, k01, k02, k03, k04, k05, k06, \
         k10, k11, k12, k13, k14, k15, k16, \
@@ -260,15 +238,16 @@
         L31,L32,L33,L34,L35,           R31,R32,R33,R34,R35,  \
         L41,L42,L43,L44,                   R42,R43,R44,R45   \
     ) WRAPPER_ergodox_common( \
-              L11 ,       L12 ,       L13 ,       L14 , L15,           R11,       R12 ,       R13 ,       R14 ,        R15,  \
-              L21 , SFT_T(L22), GUI_T(L23), ALT_T(L24), L25,           R21, ALT_T(R22), GUI_T(R23), SFT_T(R24),        R25,  \
-        CTL_T(L31),       L32 ,       L33 ,       L34 , L35,           R31,       R32 ,       R33 ,       R34 , CTL_T(R35),  \
-              L41 ,       L42 ,       L43 ,       L44 ,                           R42 ,       R43 ,       R44 ,        R45   )
+               L11,        L12,        L13,        L14, L15,           R11,        R12,        R13,        R14,        R15,  \
+               L21, SFT_T(L22), GUI_T(L23), ALT_T(L24), L25,           R21, ALT_T(R22), GUI_T(R23), SFT_T(R24),        R25,  \
+        CTL_T(L31),        L32,        L33,        L34, L35,           R31,        R32,        R33,        R34, CTL_T(R35),  \
+               L41,        L42,        L43,        L44,                            R42,        R43,        R44,        R45   )
 
 // These macros are used when defining layouts in keymap.c
 #   define LAYOUT_ergodox_common(...)  WRAPPER_ergodox_common(__VA_ARGS__)
 #   define LAYOUT_ergodox_mods(...)    WRAPPER_ergodox_mods(__VA_ARGS__)
-#endif // END Keyboard specific wrapper defines
+#endif // END LAYOUT Wrappers
+
 /**
  * Alpha/Num key wrappers for portability
  */
@@ -302,7 +281,7 @@
 // Lower
 #define __________________LOWER_L1___________________   KC_PGUP, KC_TAB,  KC_UP,   KC_ENT,  KC_PGDN
 #define __________________LOWER_L2___________________   KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END
-#define __________________LOWER_L3___________________   KC_ESC,  KC_BSPC, KC_CUT,  KC_DEL,  KC_CCCV
+#define __________________LOWER_L3___________________   KC_ESC,  KC_BSPC, XXXXXXX, KC_DEL,  KC_CCCV
 
 #define __________________LOWER_R1___________________   XXXXXXX, KC_7, KC_8,   KC_9,    KC_ASTR
 #define __________________LOWER_R2___________________   XXXXXXX, KC_4, KC_5,   KC_6,    KC_SLSH
@@ -310,12 +289,12 @@
 //  Relevant keys: ->                                            KC_0, KC_DOT, KC_COMM, KC_PLUS <- these keys break our lovely wrapper pattern
  
 // Raise
-#define __________________RAISE_L1___________________   KC_PIPE, KC_UNDS, KC_LBRC, KC_RBRC, KC_AMPR
-#define __________________RAISE_L2___________________   KC_BSLS, KC_SLSH, KC_LCBR, KC_RCBR, KC_ASTR
-#define __________________RAISE_L3___________________   KC_HASH, KC_DLR , KC_PERC, KC_TILD, KC_GRV
+#define __________________RAISE_L1___________________   KC_AMPR, KC_MINS, KC_LBRC, KC_RBRC, KC_PIPE
+#define __________________RAISE_L2___________________   KC_BSLS, KC_SLSH, KC_LPRN, KC_RPRN, KC_ASTR
+#define __________________RAISE_L3___________________   KC_HASH,  KC_DLR, KC_PERC, KC_TILD, KC_GRV
 
-#define __________________RAISE_R1___________________   KC_EXLM, KC_LABK, KC_RABK, KC_MINS, KC_SCLN
-#define __________________RAISE_R2___________________   KC_QUES, KC_LPRN, KC_RPRN, KC_EQL,  KC_COLN
+#define __________________RAISE_R1___________________   KC_EXLM, KC_LABK, KC_RABK, KC_UNDS, KC_SCLN
+#define __________________RAISE_R2___________________   KC_QUES, KC_LCBR, KC_RCBR, KC_EQL,  KC_COLN
 #define __________________RAISE_R3___________________   KC_AT,   KC_QUOT, KC_DQUO, KC_PLUS, KC_CIRC
 
 // Adjust
