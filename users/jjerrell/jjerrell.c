@@ -54,7 +54,8 @@ __attribute__((weak)) void leader_scan_secrets(void) {}
             }
 
             #ifndef NO_SECRETS
-            leader_scan_secrets();
+                // #include "secrets.c"
+                leader_scan_secrets();
             #endif // !NO_SECRETS
             set_mods(mods);
         }
