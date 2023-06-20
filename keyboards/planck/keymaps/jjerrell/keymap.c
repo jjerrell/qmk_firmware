@@ -92,9 +92,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
+bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LYR_TGL:
+            if (record->event.pressed) {
+                // extending TOGGLE_LAYER_COLOR to also toggle rgb_matrix
+                rgb_matrix_toggle_noeeprom();
+            }
+            // keep processing for normal funtionality
+            break;
+    }
+    return true;
+}
+
 layer_state_t layer_state_set_keymap(layer_state_t state) {
-    planck_ez_right_led_level((uint8_t)keyboard_config.led_level * 255 / 8);
-    planck_ez_left_led_level((uint8_t)keyboard_config.led_level * 255 / 8);
+    planck_ez_right_led_level(10);
+    planck_ez_left_led_level(10);
     planck_ez_left_led_off();
     planck_ez_right_led_off();
     switch (get_highest_layer(state)) {

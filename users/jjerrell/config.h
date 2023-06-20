@@ -23,6 +23,11 @@
 #endif
 #define TAP_CODE_DELAY 20
 
+#ifdef RGB_MATRIX_ENABLE
+#   define RGBLIGHT_SLEEP  // enable rgblight_suspend() and rgblight_wakeup() in keymap.c
+#   define RGBLIGHT_TIMEOUT 6000  // ms to wait until rgblight time out
+#endif // RGB_MATRIX_ENABLE
+
 // Space savers
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
