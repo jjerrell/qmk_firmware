@@ -1,15 +1,4 @@
-SRC += jjerrell.c \
-       process_records.c
-
-LEADER_ENABLE = yes
-MOUSEKEY_ENABLE = yes
-EXTRAKEY_ENABLE = yes
-
-ifneq ($(PLATFORM),CHIBIOS)
-    LTO_ENABLE        = yes
-endif
-SPACE_CADET_ENABLE    = no
-GRAVE_ESC_ENABLE      = no
+SRC += $(USER_PATH)/jjerrell.c
 
 ifneq ($(strip $(NO_SECRETS)), yes)
     ifneq ("$(wildcard $(USER_PATH)/secrets.c)","")
@@ -20,8 +9,16 @@ ifneq ($(strip $(NO_SECRETS)), yes)
     endif
 endif
 
-# TODO: RGB is next
-# RGB_MATRIX_ENABLE ?= no
-# ifneq ($(strip $(RGB_MATRIX_ENABLE)), no)
-#     SRC += rgb_matrix_stuff.c
-# endif
+LEADER_ENABLE = yes
+EXTRAKEY_ENABLE = yes
+AUTOCORRECT_ENABLE = yes
+CAPS_WORD_ENABLE = yes
+
+# space savers
+LTO_ENABLE = yes
+CONSOLE_ENABLE = no
+COMMAND_ENABLE = no
+MOUSEKEY_ENABLE = no
+
+SPACE_CADET_ENABLE = no
+GRAVE_ESC_ENABLE = no

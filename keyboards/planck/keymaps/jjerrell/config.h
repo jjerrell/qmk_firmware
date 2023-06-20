@@ -1,4 +1,4 @@
-// Copyright (C) 2023 Jerrell, Jacob <@jjerrell>
+// Copyright (C) 2021 Jerrell, Jacob <@jjerrell>
 //
 // This file is part of qmk_firmware.
 //
@@ -15,20 +15,24 @@
 // You should have received a copy of the GNU General Public License
 // along with qmk_firmware.  If not, see <http://www.gnu.org/licenses/>.
 
-#define LEADER_TIMEOUT 250
-#define LEADER_PER_KEY_TIMING
+#pragma once
 
-#if defined(TAP_CODE_DELAY)
-#    undef TAP_CODE_DELAY
+#ifdef KEYBOARD_planck_ez_glow
+#    undef PRODUCT
+#    define PRODUCT "Planck EZ Glow - Modified by <@jjerrell>"
 #endif
-#define TAP_CODE_DELAY 20
 
-// Space savers
-#undef LOCKING_SUPPORT_ENABLE
-#undef LOCKING_RESYNC_ENABLE
+// Get some keycodes and functionality for free See "../../ez/ez.c"
+#define ORYX_CONFIGURATOR
+#define PLANCK_EZ_USER_LEDS
 
-#define NO_ACTION_ONESHOT
+// Allows time for repositioning hands due to awkward key placement
+#define LEADER_NO_TIMEOUT
 
-#define NO_MUSIC_MODE
+#ifdef AUDIO_ENABLE
+#    define STARTUP_SONG SONG(PLANCK_SOUND)
+// #define STARTUP_SONG SONG(NO_SOUND)
 
-// https://docs.qmk.fm/#/feature_secure?id=secure
+#    define DEFAULT_LAYER_SONGS \
+        { SONG(WORKMAN_SOUND), SONG(QWERTY_SOUND) }
+#endif
