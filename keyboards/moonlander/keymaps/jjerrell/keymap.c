@@ -18,6 +18,7 @@
  */
 
 #include "jjerrell.h"
+#include "layouts.h"
 
 enum moonlander_layers {
     _GAME_LOWER = LAYER_SAFE_RANGE,
@@ -26,56 +27,40 @@ enum moonlander_layers {
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_WORKMAN] = LAYOUT_moonlander_mods(
-        __________________WORKMN_L1__________________, __________________WORKMN_R1__________________,
-        __________________WORKMN_L2__________________, __________________WORKMN_R2__________________,
-        __________________WORKMN_L3__________________, __________________WORKMN_R3__________________,
-        XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT,                       KC_RSFT, XXXXXXX, XXXXXXX, XXXXXXX
+    [_WORKMAN] = KEYMAP_moonlander_modifiers(
+        KC_ESC,  _________________NUMBERS_L_________________, KC_ARROW,    KC_MINS, _________________NUMBERS_R_________________, KC_EQL,
+        KC_TAB,  _________________WORKMN_L1_________________, KC_LPRN,     KC_RPRN, _________________WORKMN_R1_________________, KC_BSLS,
+        CW_TOGG, _________________WORKMN_L2_________________, KC_LBRC,     KC_RBRC, _________________WORKMN_R2_________________, KC_QUOT,
+        KC_LSFT, _________________WORKMN_L3_________________,                       _________________WORKMN_R3_________________, KC_RSFT,
+        QK_LEAD, XXXXXXX, XXXXXXX, KC_UP, KC_LEFT,            XXXXXXX,     XXXXXXX,         KC_RIGHT, KC_DOWN, XXXXXXX, XXXXXXX, KC_GAME,
+                                             KC_SPC, KC_BSPC, KC_RISE,     KC_LOWR, KC_TAB, KC_ENTER
     ),
 
-    [_LOWER] = LAYOUT_moonlander_mods(
-        __________________LOWER_L1___________________, __________________LOWER_R1___________________,
-        __________________LOWER_L2___________________, __________________LOWER_R2___________________,
-        __________________LOWER_L3___________________, __________________LOWER_R3___________________,
-          XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT,                         KC_0, KC_DOT, KC_COMM, KC_PLUS
+    [_LOWER] = KEYMAP_moonlander_modifiers(
+        _______, _______________________FROW_L_______________________,      _______________________FROW_R_______________________, _______,
+        _______, _________________LOWER_L1__________________, _______,      _______, _________________LOWER_R1__________________, _______,
+        _______, _________________LOWER_L2__________________, _______,      _______, _________________LOWER_R2__________________, _______,
+        _______, _________________LOWER_L3__________________,                        _________________LOWER_R3__________________, _______,
+        _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          _______,      _______,          _____________LOWER_R4_____________, _______,
+                                            _______, _______, _______,      _______, _______, _______ 
     ),
 
-    [_RAISE] = LAYOUT_moonlander_common(
-        __________________RAISE_L1___________________, __________________RAISE_R1___________________,
-        __________________RAISE_L2___________________, __________________RAISE_R2___________________,
-        __________________RAISE_L3___________________, __________________RAISE_R3___________________,
-        XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT,                       KC_RSFT, XXXXXXX, XXXXXXX, XXXXXXX
+    [_RAISE] = KEYMAP_moonlander_modifiers(
+        _______, _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______, _______,
+        _______, _________________RAISE_L1__________________, _______,    _______, _________________RAISE_R1__________________, _______,
+        _______, _________________RAISE_L2__________________, _______,    _______, _________________RAISE_R2__________________, _______,
+        _______, _________________RAISE_L3__________________,                      _________________RAISE_R3__________________, _______,
+        _______, _______, _______, _______, _______,          _______,    _______,          _______, _______, _______, _______, _______,
+                                            _______, _______, _______,    _______, _______, _______
     ),
 
-    [_ADJUST] = LAYOUT_moonlander_common(
-        __________________ADJUST_L1__________________, __________________ADJUST_R1__________________,
-        __________________ADJUST_L2__________________, __________________ADJUST_R2__________________,
-        __________________ADJUST_L3__________________, __________________ADJUST_R3__________________,
-        XXXXXXX, XXXXXXX, XXXXXXX, KC_LSFT,                       KC_RSFT, XXXXXXX, XXXXXXX, XXXXXXX
-    ),
-
-    [_SPECIAL] = LAYOUT_moonlander_common(
-        XXXXXXX, XXXXXXX, KC_WH_D, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, KC_WH_L, KC_WH_U, KC_WH_R, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX, KC_LALT,                       KC_RALT, XXXXXXX, XXXXXXX, XXXXXXX
-    ),
-
-    [_GAME] = LAYOUT_moonlander_gamepad(
-        KC_ESC,  KC_1,     KC_2,      KC_3,     KC_4,     KC_5, KC_6,
-        KC_TAB,  __________________QWERTY_L1__________________, KC_SLSH,
-        KC_LALT, __________________QWERTY_L2__________________, KC_BSLS,
-        KC_LSFT, __________________QWERTY_L3__________________,
-        KC_LGUI, MACRO_1, MACRO_2, MACRO_3, MACRO_4,   QK_LOCK,
-                                    KC_SPC, KC_BTN2, MO(_LOWER)
-    ),
-    [_GAME_LOWER] = LAYOUT_moonlander_gamepad(
-        KC_GRV,  KC_7,     KC_8,      KC_9,     KC_0,  KC_MINS, KC_EQL,
-        KC_TAB,  __________________QWERTY_L1__________________, KC_SLSH,
-        KC_LALT, __________________QWERTY_L2__________________, KC_BSLS,
-        KC_LSFT, __________________QWERTY_L3__________________,
-        KC_LGUI, MACRO_5, MACRO_6, MACRO_7, MACRO_8,   QK_LOCK,
-                                    KC_SPC, KC_BTN2, MO(_LOWER)
+    [_ADJUST] = KEYMAP_moonlander_layers(
+        _______, _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______, _______,
+        _______, _________________ADJUST_L1_________________, _______,    _______, _________________ADJUST_R1_________________, _______,
+        _______, _________________ADJUST_L2_________________, _______,    _______, _________________ADJUST_R2_________________, _______,
+        _______, _________________ADJUST_L3_________________,                      _________________ADJUST_R3_________________, _______,
+        _______, _______, _______, _______, _______,          _______,    _______,          _______, _______, _______, _______, _______,
+                                            _______, _______, _______,    _______, _______, _______
     )
 };
 // clang-format on
@@ -89,29 +74,28 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
     ML_LED_6(0);
     state = update_tri_layer_state(state, _GAME, _LOWER, _GAME_LOWER);
     switch (get_highest_layer(state)) {
-        case 1:
+        case _LOWER:
             ML_LED_1(1);
             ML_LED_4(1);
             break;
-        case 2:
+        case _RAISE:
             ML_LED_2(1);
             ML_LED_5(1);
             break;
-        case 3:
+        case _ADJUST:
             ML_LED_3(1);
             break;
-        case 4:
-            ML_LED_4(1);
-            break;
-        case 5:
-            ML_LED_5(1);
-            break;
-        case 6:
-            ML_LED_6(1);
-            break;
+        // case 4:
+        //     ML_LED_4(1);
+        //     break;
+        // case 5:
+        //     ML_LED_5(1);
+        //     break;
+        // case 6:
+        //     ML_LED_6(1);
+        //     break;
         default:
             break;
     }
-
     return state;
 }
