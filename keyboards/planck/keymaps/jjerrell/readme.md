@@ -1,10 +1,14 @@
 # JJerrell's Planck EZ Layout
 
-My second ZSA board. Justified for use while relaxing, doing anything outside of my office, or traveling. On my 2017 MacBook with the terrible keyswitches, I use Karabiner-Elements to disable the built-in keyboard when the Planck is connected. With that, I can place the quality board right ontop of the laptop keyboard.
+General purpose daily driver. Fits perfectly over the laptops disabled keyboard!
 
 ## Layouts
 
+Patterns used for describing the keyboard.
+
 ### Empty ASCII Layout
+
+Visual layer representation
 
 ```
 ,-----------------------------------------------------------------------------------.
@@ -20,6 +24,8 @@ My second ZSA board. Justified for use while relaxing, doing anything outside of
 
 ### Empty Wrapper
 
+Base keycode positions for layout wrapper designs.
+
 ```c
 (                                                                   \
 K01, K02, K03, K04, K05,   K06,     K07,   K08, K09, K0A, K0B, K0C, \
@@ -27,4 +33,22 @@ K11, K12, K13, K14, K15,   K16,     K17,   K18, K19, K0A, K1B, K1C, \
 K21, K22, K23, K24, K25,   K26,     K27,   K28, K29, K0A, K2B, K2C, \
 K31, K32, K33, K34, K35,   K36,   XXXXXXX, K38, K39, K0A, K3B, K3C  \
 )
+```
+
+### RGB Matrix
+
+RGB matrix light indices.
+
+```c
+/*
+,-----------------------------------------------------------------------------------.
+|   0  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |  10  |  11  |
+|------+------+------+------+------+------+------+------+------+------+------+------|
+|  12  |  13  |  14  |  15  |  16  |  17  |  18  |  19  |  20  |  21  |  22  |  23  |
+|------+------+------+------+------+------+------+------+------+------+------+------|
+|  24  |  25  |  26  |  27  |  28  |  29  |  30  |  31  |  32  |  33  |  34  |  35  |
+|------+------+------+------+------+------+------+------+------+------+------+------|
+|  36  |  37  |  38  |  39  |  40  |      41     |  42  |  43  |  44  |  45  |  46  |
+`-----------------------------------------------------------------------------------'
+*/
 ```
