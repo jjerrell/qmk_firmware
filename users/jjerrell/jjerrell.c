@@ -17,7 +17,8 @@
 
 #include "jjerrell.h"
 
-uint16_t copy_paste_timer = 0;
+uint16_t copy_paste_timer    = 0;
+bool     caps_word_is_active = false;
 
 // Matrix scan
 __attribute__((weak)) void matrix_scan_keymap(void) {}
@@ -71,8 +72,12 @@ __attribute__((weak)) bool process_record_secrets(uint16_t keycode, keyrecord_t 
     return true;
 }
 
+/* 
+    Fixes an issue with shifted keycodes being wrapped with MOD_T functions on the _RAISE layers.
+    See https://docs.qmk.fm/#/mod_tap?id=intercepting-mod-taps for more info
+*/
 bool process_record_mod_intercept(uint16_t keycode, keyrecord_t *record) {
-    // https://docs.qmk.fm/#/mod_tap?id=intercepting-mod-taps
+    // this could be a switch by getting highest layer if this becomes problematic on other layers
     if (IS_LAYER_ON(_RAISE)) {
         switch (keycode) {
             case CTL_T(KC_HASH):
@@ -81,12 +86,18 @@ bool process_record_mod_intercept(uint16_t keycode, keyrecord_t *record) {
             case ALT_T(KC_LCBR):
             case GUI_T(KC_RCBR):
             case CTL_T(KC_CIRC):
+                // Check tap.count to make sure we aren't processing a modifier
                 if (record->tap.count && record->event.pressed) {
+                    // Apply shift
                     register_code(KC_LSFT);
+                    // Using tap_code16 we can send the uint16_t keycode parameter
                     tap_code16(keycode);
+                    // Release shift
                     unregister_code(KC_LSFT);
+                    // stop processing this keycode or the firmware will send the unshifted keycode also
                     return false;
                 }
+                // Modifier processing or not enough time elapsed to determine if it's a tap
                 break;
         }
     }
@@ -129,6 +140,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     } else {
         return false;
     }
+}
+
+// RGB states
+__attribute__((weak)) bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max, bool active_caps_word) {
+    return true;
+}
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    return rgb_matrix_indicators_advanced_keymap(led_min, led_max, caps_word_is_active);
+}
+
+__attribute__((weak)) void caps_word_set_keymap(bool active) {}
+
+void caps_word_set_user(bool active) {
+    // track state for rgb matrix keymap callback function
+    caps_word_is_active = active;
+
+    caps_word_set_keymap(active);
 }
 
 // layer states

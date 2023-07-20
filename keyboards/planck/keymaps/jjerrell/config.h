@@ -22,17 +22,13 @@
 #    define PRODUCT "Planck EZ Glow - Modified by <@jjerrell>"
 #endif
 
+#define LEADER_NO_TIMEOUT
+
 // Get some keycodes and functionality for free See "../../ez/ez.c"
 #define ORYX_CONFIGURATOR
 #define PLANCK_EZ_USER_LEDS
 
-// Allows time for repositioning hands due to awkward key placement
-#define LEADER_NO_TIMEOUT
-
 #ifdef AUDIO_ENABLE
 #    define STARTUP_SONG SONG(PLANCK_SOUND)
 // #define STARTUP_SONG SONG(NO_SOUND)
-
-#    define DEFAULT_LAYER_SONGS \
-        { SONG(WORKMAN_SOUND), SONG(QWERTY_SOUND) }
 #endif

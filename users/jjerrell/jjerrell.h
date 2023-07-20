@@ -65,6 +65,9 @@ bool leader_end_secret(void);
 bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
 bool process_record_secrets(uint16_t keycode, keyrecord_t *record);
 
+void caps_word_set_keymap(bool active);
+bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max, bool active_caps_word);
+
 layer_state_t layer_state_set_keymap(layer_state_t state);
 
 void housekeeping_task_keymap(void);
