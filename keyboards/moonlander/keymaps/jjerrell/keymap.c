@@ -1,29 +1,25 @@
 /**
  * Copyright (C) 2021 Jerrell, Jacob <@jjerrell>
- * 
+ *
  * This file is part of qmk_firmware.
- * 
+ *
  * qmk_firmware is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * qmk_firmware is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with qmk_firmware.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include "jjerrell.h"
 #include "layouts.h"
-
-enum moonlander_layers {
-    _GAME_LOWER = LAYER_SAFE_RANGE,
-    // _GAME_RAISE,
-};
+#include "led_custom.h"
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -66,34 +62,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 layer_state_t layer_state_set_keymap(layer_state_t state) {
-    ML_LED_1(0);
-    ML_LED_2(0);
-    ML_LED_3(0);
-    ML_LED_4(0);
-    ML_LED_5(0);
-    ML_LED_6(0);
-    state = update_tri_layer_state(state, _GAME, _LOWER, _GAME_LOWER);
+    moonlander_led_all(false);
     switch (get_highest_layer(state)) {
         case _LOWER:
-            ML_LED_1(1);
-            ML_LED_4(1);
+            ML_LED_L1(true);
+            ML_LED_R3(true);
             break;
         case _RAISE:
-            ML_LED_2(1);
-            ML_LED_5(1);
+            ML_LED_L2(true);
+            ML_LED_R2(true);
             break;
         case _ADJUST:
-            ML_LED_3(1);
+            ML_LED_L3(true);
+            ML_LED_R1(true);
             break;
-        // case 4:
-        //     ML_LED_4(1);
-        //     break;
-        // case 5:
-        //     ML_LED_5(1);
-        //     break;
-        // case 6:
-        //     ML_LED_6(1);
-        //     break;
         default:
             break;
     }
