@@ -85,6 +85,7 @@ bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max, boo
                         }
                         break;
                     default:
+                        rgb_matrix_index_set_indicator(i, RGB_OFF);
                         break;
                 }
             }
@@ -103,6 +104,7 @@ bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max, boo
                         rgb_matrix_index_set_indicator(i, RGB_MAGENTA);
                         break;
                     default:
+                        rgb_matrix_index_set_indicator(i, RGB_OFF);
                         break;
                 }
             }
