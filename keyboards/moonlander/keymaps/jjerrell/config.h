@@ -23,6 +23,6 @@
 #define PRODUCT "Moonlander Mark I - Modified by <@jjerrell>"
 
 #ifdef AUDIO_ENABLE
-#    define STARTUP_SONG SONG(PLANCK_SOUND)
+#    define STARTUP_SONG SONG(WORKMAN_SOUND)
 // #define STARTUP_SONG SONG(NO_SOUND)
 #endif

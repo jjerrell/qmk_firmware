@@ -33,7 +33,6 @@ enum userspace_layers {
     _GAME,
     LAYER_SAFE_RANGE
 };
-// clang-format on
 
 enum userspace_keycodes {
     KC_ARROW = QK_USER, // ->
@@ -41,9 +40,8 @@ enum userspace_keycodes {
     KC_VRSN,            // Print QMK Firmware and board info
     KC_CCCV,
     USER_SAFE_RANGE
-    // RGB_IDL,            // Toggle RGB Idle animations
-    // RGB_TGL             // Toggle RGB Layer Indication
 };
+// clang-format on
 
 #define KC_QWERTY DF(_QWERTY)
 #define KC_WRKMAN DF(_WORKMAN)
@@ -66,7 +64,7 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record);
 bool process_record_secrets(uint16_t keycode, keyrecord_t *record);
 
 void caps_word_set_keymap(bool active);
-bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max, bool active_caps_word);
+bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max);
 
 layer_state_t layer_state_set_keymap(layer_state_t state);
 
