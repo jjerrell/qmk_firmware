@@ -18,52 +18,49 @@
 #include "jjerrell.h"
 #include "rgb_matrix.h"
 
-/* Allows using RGB macros/constants from qmk_firmware/quantum/color.h */
-#define rgb_matrix_index_set_indicator(...) RGB_MATRIX_INDICATOR_SET_COLOR(__VA_ARGS__);
-
-bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max, bool active_caps_word) {
+bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max) {
     uint8_t active_mods = get_mods();
     switch (get_highest_layer(layer_state)) {
         case 0:
             // Modifier state indication
             if (active_mods & MOD_MASK_CTRL) {
-                rgb_matrix_index_set_indicator(24, RGB_BLUE);
-                rgb_matrix_index_set_indicator(35, RGB_BLUE);
+                rgb_matrix_set_color(24, RGB_BLUE);
+                rgb_matrix_set_color(35, RGB_BLUE);
             } else {
-                rgb_matrix_index_set_indicator(24, RGB_CORAL);
-                rgb_matrix_index_set_indicator(35, RGB_CORAL);
+                rgb_matrix_set_color(24, RGB_CORAL);
+                rgb_matrix_set_color(35, RGB_CORAL);
             }
 
-            if (active_mods & MOD_MASK_SHIFT || active_caps_word) {
-                if (active_caps_word) {
-                    rgb_matrix_index_set_indicator(39, RGB_RED);
+            if (active_mods & MOD_MASK_SHIFT || is_caps_word_on()) {
+                if (is_caps_word_on()) {
+                    rgb_matrix_set_color(39, RGB_RED);
                 }
-                rgb_matrix_index_set_indicator(13, RGB_RED);
-                rgb_matrix_index_set_indicator(22, RGB_RED);
+                rgb_matrix_set_color(13, RGB_RED);
+                rgb_matrix_set_color(22, RGB_RED);
             } else {
-                rgb_matrix_index_set_indicator(13, RGB_AZURE);
-                rgb_matrix_index_set_indicator(22, RGB_AZURE);
+                rgb_matrix_set_color(13, RGB_AZURE);
+                rgb_matrix_set_color(22, RGB_AZURE);
             }
 
             if (active_mods & MOD_MASK_GUI) {
-                rgb_matrix_index_set_indicator(14, RGB_MAGENTA);
-                rgb_matrix_index_set_indicator(21, RGB_MAGENTA);
+                rgb_matrix_set_color(14, RGB_MAGENTA);
+                rgb_matrix_set_color(21, RGB_MAGENTA);
             } else {
-                rgb_matrix_index_set_indicator(14, RGB_GOLD);
-                rgb_matrix_index_set_indicator(21, RGB_GOLD);
+                rgb_matrix_set_color(14, RGB_GOLD);
+                rgb_matrix_set_color(21, RGB_GOLD);
             }
 
             if (active_mods & MOD_MASK_ALT) {
-                rgb_matrix_index_set_indicator(15, RGB_CHARTREUSE);
-                rgb_matrix_index_set_indicator(20, RGB_CHARTREUSE);
+                rgb_matrix_set_color(15, RGB_CHARTREUSE);
+                rgb_matrix_set_color(20, RGB_CHARTREUSE);
             } else {
-                rgb_matrix_index_set_indicator(15, RGB_SPRINGGREEN);
-                rgb_matrix_index_set_indicator(20, RGB_SPRINGGREEN);
+                rgb_matrix_set_color(15, RGB_SPRINGGREEN);
+                rgb_matrix_set_color(20, RGB_SPRINGGREEN);
             }
 
             // Thumb keys
-            rgb_matrix_index_set_indicator(40, RGB_WHITE);
-            rgb_matrix_index_set_indicator(42, RGB_WHITE);
+            rgb_matrix_set_color(40, RGB_WHITE);
+            rgb_matrix_set_color(42, RGB_WHITE);
             break;
         case _LOWER:
             for (uint16_t i = led_min; i <= led_max; i++) {
@@ -71,7 +68,7 @@ bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max, boo
                     // arrow keys
                     case 2:
                     case 13 ... 15:
-                        rgb_matrix_index_set_indicator(i, RGB_WHITE);
+                        rgb_matrix_set_color(i, RGB_WHITE);
                         break;
                     // numpad
                     case 8 ... 10:
@@ -79,19 +76,19 @@ bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max, boo
                     case 32 ... 34:
                     case 43:
                         if (active_mods & MOD_MASK_SHIFT) {
-                            rgb_matrix_index_set_indicator(i, RGB_TEAL);
+                            rgb_matrix_set_color(i, RGB_TEAL);
                         } else {
-                            rgb_matrix_index_set_indicator(i, RGB_GREEN);
+                            rgb_matrix_set_color(i, RGB_GREEN);
                         }
                         break;
                     default:
-                        rgb_matrix_index_set_indicator(i, RGB_OFF);
+                        rgb_matrix_set_color(i, RGB_OFF);
                         break;
                 }
             }
             // Thumb keys
-            rgb_matrix_index_set_indicator(40, RGB_OFF);
-            rgb_matrix_index_set_indicator(42, RGB_RED);
+            rgb_matrix_set_color(40, RGB_OFF);
+            rgb_matrix_set_color(42, RGB_RED);
             break;
         case _RAISE:
             // light up the alpha key ranges
@@ -101,16 +98,16 @@ bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max, boo
                     case 7 ... 16:
                     case 19 ... 28:
                     case 31 ... 35:
-                        rgb_matrix_index_set_indicator(i, RGB_MAGENTA);
+                        rgb_matrix_set_color(i, RGB_MAGENTA);
                         break;
                     default:
-                        rgb_matrix_index_set_indicator(i, RGB_OFF);
+                        rgb_matrix_set_color(i, RGB_OFF);
                         break;
                 }
             }
             // Thumb keys
-            rgb_matrix_index_set_indicator(40, RGB_RED);
-            rgb_matrix_index_set_indicator(42, RGB_OFF);
+            rgb_matrix_set_color(40, RGB_RED);
+            rgb_matrix_set_color(42, RGB_OFF);
             break;
         case _ADJUST:
             rgb_matrix_set_color_all(RGB_RED);

@@ -17,8 +17,7 @@
 
 #include "jjerrell.h"
 
-uint16_t copy_paste_timer    = 0;
-bool     caps_word_is_active = false;
+uint16_t copy_paste_timer = 0;
 
 // Matrix scan
 __attribute__((weak)) void matrix_scan_keymap(void) {}
@@ -143,21 +142,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 // RGB states
-__attribute__((weak)) bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max, bool active_caps_word) {
+__attribute__((weak)) bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max) {
     return true;
 }
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    return rgb_matrix_indicators_advanced_keymap(led_min, led_max, caps_word_is_active);
-}
-
-__attribute__((weak)) void caps_word_set_keymap(bool active) {}
-
-void caps_word_set_user(bool active) {
-    // track state for rgb matrix keymap callback function
-    caps_word_is_active = active;
-
-    caps_word_set_keymap(active);
+    return rgb_matrix_indicators_advanced_keymap(led_min, led_max);
 }
 
 // layer states

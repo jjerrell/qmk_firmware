@@ -16,9 +16,10 @@ CAPS_WORD_ENABLE = yes
 
 # space savers
 LTO_ENABLE = yes
+
+# reduce firmware size -- enable where needed
 CONSOLE_ENABLE = no
 COMMAND_ENABLE = no
 MOUSEKEY_ENABLE = no
-
 SPACE_CADET_ENABLE = no
 GRAVE_ESC_ENABLE = no
