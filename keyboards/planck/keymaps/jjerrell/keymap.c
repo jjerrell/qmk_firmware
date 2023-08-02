@@ -126,3 +126,42 @@ layer_state_t layer_state_set_keymap(layer_state_t state) {
     }
     return state;
 }
+
+bool rgb_indicators_process_keymap(uint8_t led_min, uint8_t led_max) {
+    rgb_matrix_set_color_all(RGB_OFF);
+    switch (get_highest_layer(layer_state)) {
+        case 0:
+            // Thumb keys
+            rgb_matrix_set_color(40, RGB_WHITE);
+            rgb_matrix_set_color(42, RGB_WHITE);
+            break;
+        case _LOWER:
+            // Thumb keys
+            rgb_matrix_set_color(40, RGB_OFF);
+            rgb_matrix_set_color(42, RGB_RED);
+            break;
+        case _RAISE:
+            // light up the alpha key ranges
+            for (uint16_t i = 0; i <= 46; i++) {
+                switch (i) {
+                    case 0 ... 4:
+                    case 7 ... 16:
+                    case 19 ... 28:
+                    case 31 ... 35:
+                        rgb_matrix_set_color(i, RGB_MAGENTA);
+                        break;
+                    default:
+                        rgb_matrix_set_color(i, RGB_OFF);
+                        break;
+                }
+            }
+            // Thumb keys
+            rgb_matrix_set_color(40, RGB_RED);
+            rgb_matrix_set_color(42, RGB_OFF);
+            break;
+        case _ADJUST:
+            rgb_matrix_set_color_all(RGB_RED);
+            break;
+    }
+    return true;
+}

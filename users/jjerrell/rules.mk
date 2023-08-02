@@ -1,4 +1,5 @@
-SRC += $(USER_PATH)/jjerrell.c
+SRC += $(USER_PATH)/jjerrell.c \
+    $(USER_PATH)/lighting/rgb_custom.c
 
 ifneq ($(strip $(NO_SECRETS)), yes)
     ifneq ("$(wildcard $(USER_PATH)/secrets.c)","")

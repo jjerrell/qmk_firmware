@@ -141,15 +141,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-// RGB states
-__attribute__((weak)) bool rgb_matrix_indicators_advanced_keymap(uint8_t led_min, uint8_t led_max) {
-    return true;
-}
-
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    return rgb_matrix_indicators_advanced_keymap(led_min, led_max);
-}
-
 // layer states
 __attribute__((weak)) layer_state_t layer_state_set_keymap(layer_state_t state) {
     return state;
