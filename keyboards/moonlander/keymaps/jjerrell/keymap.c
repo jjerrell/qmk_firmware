@@ -60,24 +60,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 // clang-format on
-
-layer_state_t layer_state_set_keymap(layer_state_t state) {
-    moonlander_led_all(false);
-    switch (get_highest_layer(state)) {
-        case _LOWER:
-            ML_LED_L1(true);
-            ML_LED_R3(true);
-            break;
-        case _RAISE:
-            ML_LED_L2(true);
-            ML_LED_R2(true);
-            break;
-        case _ADJUST:
-            ML_LED_L3(true);
-            ML_LED_R1(true);
-            break;
-        default:
-            break;
-    }
-    return state;
-}
