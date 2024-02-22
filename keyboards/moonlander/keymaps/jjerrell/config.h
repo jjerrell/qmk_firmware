@@ -22,6 +22,8 @@
 #undef PRODUCT
 #define PRODUCT "Moonlander Mark I - Modified by <@jjerrell>"
 
+#define MOONLANDER_USER_LEDS
+
 #ifdef AUDIO_ENABLE
 #    define STARTUP_SONG SONG(WORKMAN_SOUND)
 // #define STARTUP_SONG SONG(NO_SOUND)

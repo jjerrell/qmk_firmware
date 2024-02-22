@@ -29,10 +29,10 @@ const uint8_t RGB_LIST_ARROWS[] = {
     14,
     15
 #elif defined(KEYBOARD_moonlander)
-    9,
-    15,
+    12,
     16,
-    17
+    17,
+    22
 #endif
 };
 
@@ -49,12 +49,22 @@ const uint8_t RGB_LIST_NUMPAD[] = {
     34,
     43
 #elif defined(KEYBOARD_moonlander)
-
+    47,
+    48,
+    49,
+    52,
+    53,
+    54,
+    57,
+    58,
+    59,
+    60
 #endif
 };
 
-#define INDEX_LSFT 0
-#define INDEX_RSFT 1
+// clang-format off
+#define INDEX_LSFT   0
+#define INDEX_RSFT   1
 #define INDEX_CWORD  2
 
 #define INDEX_LCMD   3
@@ -65,6 +75,7 @@ const uint8_t RGB_LIST_NUMPAD[] = {
 
 #define INDEX_LCTL   7
 #define INDEX_RCTL   8
+// clang-format on
 
 /* Order is important. This list will be explicitly accessed by index */
 const uint8_t RGB_LIST_MODIFIERS[] = {
@@ -84,6 +95,19 @@ const uint8_t RGB_LIST_MODIFIERS[] = {
     24,
     35
 #elif defined(KEYBOARD_moonlander)
-
+    // shift
+    12,
+    48,
+    // caps word
+    2,
+    // command
+    17,
+    53,
+    // option/alt
+    22,
+    58,
+    // control
+    8,
+    44
 #endif
 };
